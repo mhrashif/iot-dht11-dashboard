@@ -1,43 +1,80 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ESP32 DHT11 Dashboard</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESP32 Cloud Monitoring System</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
 
-    <link rel="stylesheet" href="style.css" />
+<header class="header">
+<h1>🌡 ESP32 Cloud Monitoring System</h1>
+<p>Real-Time Temperature & Humidity Monitoring</p>
+<p id="tanggal"></p>
+</header>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
+<div class="top-bar">
+<div id="statusBox" class="status">🟢 Online</div>
+<button id="themeToggle">🌙 Dark Mode</button>
+</div>
 
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>🌡 ESP32 DHT11 Dashboard</h1>
-        <p id="tanggal"></p>
-      </div>
+<div id="alarmBox"></div>
 
-      <div class="status" id="statusBox">🟢 Online</div>
+<div class="stats-grid">
+<div class="card"><div class="value" id="suhu">--</div><div class="label">Current Temp (°C)</div></div>
+<div class="card"><div class="value" id="hum">--</div><div class="label">Current Humidity (%)</div></div>
+<div class="card"><div class="value" id="maxTemp">--</div><div class="label">Max Temp</div></div>
+<div class="card"><div class="value" id="minTemp">--</div><div class="label">Min Temp</div></div>
+</div>
 
-      <div id="alarmBox"></div>
+<div class="info-grid">
+<div class="info-card">
+<h3>Device Information</h3>
+<p>Device : ESP32-DHT11</p>
+<p>Database : Supabase</p>
+<p>Hosting : GitHub Pages</p>
+<p>Sampling : 10 Seconds</p>
+</div>
 
-      <div class="cards">
-        <div class="card">
-          <div class="value" id="suhu">--</div>
-          <div class="label">Suhu (°C)</div>
-        </div>
+<div class="info-card">
+<h3>System Status</h3>
+<p id="lastUpdate">Last Update : --</p>
+<p id="systemState">Waiting...</p>
+</div>
+</div>
 
-        <div class="card">
-          <div class="value" id="hum">--</div>
-          <div class="label">Kelembapan (%)</div>
-        </div>
-      </div>
+<div class="filter-bar">
+<button onclick="loadData(50)">1 Hour</button>
+<button onclick="loadData(200)">6 Hours</button>
+<button onclick="loadData(500)">24 Hours</button>
+</div>
 
-      <div class="chart-box">
-        <canvas id="myChart"></canvas>
-      </div>
-    </div>
+<div class="chart-box">
+<canvas id="myChart"></canvas>
+</div>
 
-    <script src="script.js"></script>
-  </body>
+<div class="table-box">
+<h2>Latest Sensor Records</h2>
+<table>
+<thead><tr><th>Time</th><th>Temperature</th><th>Humidity</th></tr></thead>
+<tbody id="latestTable"></tbody>
+</table>
+</div>
+
+<div class="export-wrap">
+<button id="exportBtn">📥 Export CSV</button>
+</div>
+
+<footer>
+ESP32 IoT Monitoring System<br>
+Powered by Supabase & GitHub Pages<br>
+© 2026 Muhammad Hifzhuddin Rashif
+</footer>
+
+</div>
+<script src="script.js"></script>
+</body>
 </html>
